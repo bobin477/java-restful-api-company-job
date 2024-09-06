@@ -1,6 +1,8 @@
 package vn.hoidanit.jobhunter.controller;
 
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vn.hoidanit.jobhunter.domain.User;
 import vn.hoidanit.jobhunter.service.UserService;
@@ -17,29 +19,33 @@ public class UserController {
     }
 
 
-    @GetMapping("/all-user")
-    public List<User> getAll() {
-        return this.userService.getAll();
+    @GetMapping("/all-users")
+    public ResponseEntity<List<User>> getAll() {
+        List<User> ListUser = this.userService.getAll();
+        return ResponseEntity.ok(ListUser);
     }
 
-    @GetMapping("/user/{id}")
-    public User getById(@PathVariable Long id) {
-        return this.userService.GetUserById(id);
+    @GetMapping("/users/{id}")
+    public ResponseEntity<User> getById(@PathVariable Long id) {
+        User userById = this.userService.GetUserById(id);
+        return ResponseEntity.ok(userById);
     }
 
-    @PutMapping("/user")
-    public User update(@RequestBody User user) {
-        return this.userService.handleUpdateUserById(user);
+    @PutMapping("/users")
+    public ResponseEntity<User> update(@RequestBody User user) {
+        this.userService.handleUpdateUserById(user);
+        return ResponseEntity.ok(user);
     }
 
-    @PostMapping("/user")
-    public User createNewUser(@RequestBody User user) {
-        return this.userService.handleCreateUser(user);
+    @PostMapping("/users/create")
+    public ResponseEntity<User> createNewUser(@RequestBody User user) {
+        User user1 = this.userService.handleCreateUser(user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(user1);
     }
 
-    @DeleteMapping("/user/{id}")
-    public String deleteUser(@PathVariable("id") Long id) {
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable("id") Long id) {
         this.userService.deleteUserById(id);
-        return "User with id deleted " + id;
+        return ResponseEntity.status(HttpStatus.OK).body("User deleted.");
     }
 }
