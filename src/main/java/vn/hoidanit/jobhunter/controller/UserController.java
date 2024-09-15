@@ -22,7 +22,7 @@ public class UserController {
     }
 
 
-    @GetMapping("/all-users")
+    @GetMapping("/users")
     public ResponseEntity<List<User>> getAll() {
         List<User> ListUser = this.userService.getAll();
         return ResponseEntity.ok(ListUser);
