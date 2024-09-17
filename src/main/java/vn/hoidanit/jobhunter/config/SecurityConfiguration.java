@@ -31,7 +31,7 @@ public class SecurityConfiguration {
     @Value("${hoidanit.jwt.base64-secret}")
     private String jwtKey;
 
-    @Value("${hoidanit.jwt.token-validity-in-seconds}")
+    @Value("${hoidanit.jwt.access-token-validity-in-seconds}")
     private String jwtExpirationInSeconds;
 
     @Bean
@@ -46,7 +46,7 @@ public class SecurityConfiguration {
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(
                         authz -> authz
-                                .requestMatchers("/", "/api/v1/login")
+                                .requestMatchers("/", "/api/v1/auth/login","/api/v1/auth/refresh")
                                 .permitAll()
 //                                .anyRequest().permitAll()
                                 .anyRequest()
@@ -93,7 +93,7 @@ public class SecurityConfiguration {
         JwtGrantedAuthoritiesConverter grantedAuthoritiesConverter = new
                 JwtGrantedAuthoritiesConverter();
         grantedAuthoritiesConverter.setAuthorityPrefix("");
-        grantedAuthoritiesConverter.setAuthoritiesClaimName("hoidanit");
+        grantedAuthoritiesConverter.setAuthoritiesClaimName("permission");
         JwtAuthenticationConverter jwtAuthenticationConverter = new
                 JwtAuthenticationConverter();
         jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(grantedAuthoritiesConverter);

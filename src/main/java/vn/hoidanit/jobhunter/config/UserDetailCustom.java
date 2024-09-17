@@ -1,4 +1,4 @@
-package vn.hoidanit.jobhunter.repository;
+package vn.hoidanit.jobhunter.config;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -20,6 +20,7 @@ public class UserDetailCustom implements UserDetailsService {
     public UserDetailCustom(UserService userService) {
         this.userService = userService;
     }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         vn.hoidanit.jobhunter.domain.User user = this.userService.handleGetUserByUsername(username);

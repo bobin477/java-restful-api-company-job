@@ -35,6 +35,7 @@ public class User {
 
     private String address;
 
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String refreshToken;
 
     @JsonFormat(pattern = "yyy-MM-dd HH:mm:ss a", timezone = "GMT+7")
@@ -44,7 +45,7 @@ public class User {
 
     private String createBy;
 
-    private String updateBy;
+    private String updatedAt;
 
     @PrePersist
     public void handleBeforeCreate() {
@@ -54,7 +55,7 @@ public class User {
 
     @PreUpdate
     public void handleBeforeUpdate() {
-        this.updateBy = SecurityUtil.getCurrentUserLogin().isPresent() ? SecurityUtil.getCurrentUserLogin().get() : "";
+        this.updatedAt = SecurityUtil.getCurrentUserLogin().isPresent() ? SecurityUtil.getCurrentUserLogin().get() : "";
         this.updateAt = Instant.now();
     }
 

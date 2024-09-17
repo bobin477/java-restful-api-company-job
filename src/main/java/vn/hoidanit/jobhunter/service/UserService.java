@@ -32,8 +32,8 @@ public class UserService {
         Meta meta = new Meta();
 
         meta.setPage(pageableRequest.getPageNumber() + 1);
-        meta.setTotal(pageableRequest.getPageSize());
-        meta.setPageSize(users.getSize());
+        meta.setPageSize(pageableRequest.getPageSize());
+        meta.setTotal(users.getTotalElements());
         meta.setPages(users.getTotalPages());
 
         resultPaginationDTO.setMeta(meta);
@@ -126,5 +126,18 @@ public class UserService {
         res.setGender(user.getGender());
         res.setAddress(user.getAddress());
         return res;
+    }
+
+    public void updateUserToken(String token,String email){
+        User currentUser = this.handleGetUserByUsername(email);
+
+        if(currentUser != null){
+            currentUser.setRefreshToken(token);
+            this.userRepository.save(currentUser);
+        }
+    }
+
+    public User handleGetUserByRefreshTokenEmail(String email,String token) {
+        return this.userRepository.findByRefreshTokenAndEmail(token,email);
     }
 }

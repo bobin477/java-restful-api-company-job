@@ -26,7 +26,7 @@ public class CompanyService {
         Meta meta = new Meta();
 
         meta.setPage(pageableRequest.getPageNumber() + 1);
-        meta.setTotal(pageableRequest.getPageSize());
+        meta.setPageSize(pageableRequest.getPageSize());
         meta.setPages(companyPage.getTotalPages());
         meta.setTotal(companyPage.getTotalElements());
 

@@ -50,7 +50,7 @@ public class UserController {
         return ResponseEntity.ok(this.userService.convertToResUserDTO(userById));
     }
 
-    @PostMapping("/users/create")
+    @PostMapping("/users")
     public ResponseEntity<ResCreateUserDTO> createNewUser(@Valid @RequestBody User userRequest) throws IdInvalidException {
         boolean isEmailExit = this.userService.isEmailExist(userRequest.getEmail());
 
