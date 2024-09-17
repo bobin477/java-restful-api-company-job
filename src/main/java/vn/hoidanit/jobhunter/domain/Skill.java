@@ -1,56 +1,36 @@
 package vn.hoidanit.jobhunter.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 import vn.hoidanit.jobhunter.util.SecurityUtil;
-import vn.hoidanit.jobhunter.util.constant.GenderEnum;
 
 import java.time.Instant;
+import java.util.List;
 
 @Entity
-@Table(name = "users")
+@Table(name = "skills")
 @Getter
 @Setter
-public class User {
+public class Skill {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotBlank(message = "Name khong dc de trong")
     private String name;
 
-    @NotBlank(message = "Email khong duoc de trong")
-    private String email;
-
-    @NotBlank(message = "Password khong duoc de trong")
-    private String password;
-
-    private int age;
-
-    @Enumerated(EnumType.STRING)
-    private GenderEnum gender;
-
-    private String address;
-
-    @Column(columnDefinition = "MEDIUMTEXT")
-    private String refreshToken;
-
-    @JsonFormat(pattern = "yyy-MM-dd HH:mm:ss a", timezone = "GMT+7")
     private Instant createAt;
-
     private Instant updateAt;
-
     private String createBy;
-
     private String updatedAt;
 
-    @ManyToOne
-    @JoinColumn(name="company_id")
-    Company company;
-
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "skills")
+    @JsonIgnore
+    private List<Job> jobs;
 
     @PrePersist
     public void handleBeforeCreate() {
@@ -63,5 +43,4 @@ public class User {
         this.updatedAt = SecurityUtil.getCurrentUserLogin().isPresent() ? SecurityUtil.getCurrentUserLogin().get() : "";
         this.updateAt = Instant.now();
     }
-
 }

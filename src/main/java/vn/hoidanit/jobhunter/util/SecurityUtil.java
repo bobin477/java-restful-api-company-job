@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import vn.hoidanit.jobhunter.domain.dto.auth.ResLoginDTO;
+import vn.hoidanit.jobhunter.domain.dto.response.ResLoginDTO;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;

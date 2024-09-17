@@ -7,7 +7,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vn.hoidanit.jobhunter.domain.Company;
-import vn.hoidanit.jobhunter.domain.dto.util.ResultPaginationDTO;
+import vn.hoidanit.jobhunter.domain.dto.response.ResultPaginationDTO;
 import vn.hoidanit.jobhunter.service.CompanyService;
 import vn.hoidanit.jobhunter.util.annotation.ApiMessage;
 

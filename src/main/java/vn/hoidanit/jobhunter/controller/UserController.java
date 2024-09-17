@@ -8,10 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import vn.hoidanit.jobhunter.domain.User;
-import vn.hoidanit.jobhunter.domain.dto.user.ResCreateUserDTO;
-import vn.hoidanit.jobhunter.domain.dto.user.ResUpdateUserDTO;
-import vn.hoidanit.jobhunter.domain.dto.user.ResUserDTO;
-import vn.hoidanit.jobhunter.domain.dto.util.ResultPaginationDTO;
+import vn.hoidanit.jobhunter.domain.dto.response.ResCreateUserDTO;
+import vn.hoidanit.jobhunter.domain.dto.response.ResUpdateUserDTO;
+import vn.hoidanit.jobhunter.domain.dto.response.ResUserDTO;
+import vn.hoidanit.jobhunter.domain.dto.response.ResultPaginationDTO;
 import vn.hoidanit.jobhunter.service.UserService;
 import vn.hoidanit.jobhunter.util.annotation.ApiMessage;
 import vn.hoidanit.jobhunter.util.error.IdInvalidException;
@@ -34,7 +34,6 @@ public class UserController {
     public ResponseEntity<ResultPaginationDTO> getAll(
             @Filter Specification<User> specification, Pageable pageable
     ) {
-
         return ResponseEntity.ok(this.userService.getAll(specification, pageable));
     }
 
@@ -57,6 +56,7 @@ public class UserController {
         if (isEmailExit) {
             throw new IdInvalidException(userRequest.getEmail() + " da ton tai");
         }
+
         userRequest.setPassword(this.passwordEncoder.encode(userRequest.getPassword()));
         User user1 = this.userService.handleCreateUser(userRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(this.userService.convertToResCreateUserDTO(user1));
