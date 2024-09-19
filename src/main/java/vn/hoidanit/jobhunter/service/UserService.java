@@ -49,8 +49,8 @@ public class UserService {
                         item.getGender(),
                         item.getAddress(),
                         item.getAge(),
-                        item.getUpdateAt(),
-                        item.getCreateAt(),
+                        item.getUpdatedAt(),
+                        item.getCreatedAt(),
                         new ResUserDTO.CompanyUser(
                                 item.getCompany() != null ? item.getCompany().getId() : 0,
                                 item.getCompany() != null ? item.getCompany().getName() : null)))
@@ -109,7 +109,7 @@ public class UserService {
         res.setId(user.getId());
         res.setName(user.getName());
         res.setAge(user.getAge());
-        res.setUpdatedAt(user.getUpdateAt());
+        res.setUpdatedAt(user.getUpdatedAt());
         res.setGender(user.getGender());
         res.setAddress(user.getAddress());
         return res;
@@ -135,7 +135,7 @@ public class UserService {
         res.setEmail(user.getEmail());
         res.setName(user.getName());
         res.setAge(user.getAge());
-        res.setCreatedAt(user.getCreateAt());
+        res.setCreatedAt(user.getCreatedAt());
         res.setGender(user.getGender());
         res.setAddress(user.getAddress());
         if (user.getCompany() != null) {
@@ -162,8 +162,8 @@ public class UserService {
         res.setEmail(user.getEmail());
         res.setName(user.getName());
         res.setAge(user.getAge());
-        res.setUpdatedAt(user.getUpdateAt());
-        res.setCreatedAt(user.getCreateAt());
+        res.setUpdatedAt(user.getUpdatedAt());
+        res.setCreatedAt(user.getCreatedAt());
         res.setGender(user.getGender());
         res.setAddress(user.getAddress());
         return res;

@@ -45,7 +45,7 @@ public class JobController {
         }
 
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(this.jobService.update(job));
+                .body(this.jobService.update(job, jobOptional.get()));
     }
 
     @DeleteMapping("/jobs/{id}")

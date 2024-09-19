@@ -26,7 +26,7 @@ public class SkillController {
         this.skillService = skillService;
     }
 
-    @PostMapping("/skill")
+    @PostMapping("/skills")
     @ApiMessage("create skill")
     public ResponseEntity<Skill> createSkill(@Valid @RequestBody Skill skill) throws IdInvalidException {
         Skill currentSkill = this.skillService.findSkillByName(skill.getName());
@@ -38,7 +38,7 @@ public class SkillController {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.skillService.handleCreateSkill(skill));
     }
 
-    @PutMapping("/skill")
+    @PutMapping("/skills")
     @ApiMessage("update skill")
     public ResponseEntity<Skill> updateSkill(@Valid @RequestBody Skill skill) throws IdInvalidException {
         Skill currentSkill = this.skillService.findSkillById(skill.getId());
@@ -54,7 +54,7 @@ public class SkillController {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.skillService.handleUpdateSkill(skill));
     }
 
-    @GetMapping("/skill")
+    @GetMapping("/skills")
     @ApiMessage("Fetch all skill")
     public ResponseEntity<ResultPaginationDTO> getAllSkills(
             @Filter Specification<Skill> specification, Pageable pageable
